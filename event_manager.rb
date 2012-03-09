@@ -136,11 +136,13 @@ end
         state_data[state] = state_data[state] + 1
       end
     end
-    state_data = state_data.sort_by {|state,counter| state.to_s}.reverse
-    state_data.each do |state,counter| puts "#{state}: #{counter}"
+    ranks = state_data.sort_by {|state,counter| counter}.collect{|state,counter| state}.reverse
+    state_data = state_data.sort_by {|state,counter| state}
+
+    state_data.each do |state,counter|
+      puts "#{state}:\t#{counter}\t(#{ranks.index(state) + 1})"
     end
   end
-
 end
 
 manager = EventManager.new("event_attendees.csv")
