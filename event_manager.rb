@@ -43,13 +43,20 @@ class EventManager
   def clean_zipcode(original)
     if original.nil?
       INVALID_ZIPCODE
-    elsif original.size == 4
-      "0" + original
-    elsif original.size == 3
-      "00" + original
-    else
+    elsif original.size == 5
       original
+    else
+      until original.size == 5
+        original = "0" + original
+      end
     end
+    # elsif original.size == 4
+    #   "0" + original
+    # elsif original.size == 3
+    #   "00" + original
+    # else
+    #   original
+    # end
   end
 
   def print_zipcodes
@@ -146,4 +153,4 @@ end
 end
 
 manager = EventManager.new("event_attendees.csv")
-manager.state_stats
+manager.print_zipcodes
